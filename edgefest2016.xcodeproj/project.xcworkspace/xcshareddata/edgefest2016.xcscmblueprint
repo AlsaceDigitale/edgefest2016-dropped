@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4E27FB6D9724CB132D8561E37647452683ED3594",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2A6D9FB7FAFBABC4E61E645AB3426E1AE369D7D4" : 0,
+    "4E27FB6D9724CB132D8561E37647452683ED3594" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B24B49E2-0079-4677-A1FE-805B8291810D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2A6D9FB7FAFBABC4E61E645AB3426E1AE369D7D4" : "",
+    "4E27FB6D9724CB132D8561E37647452683ED3594" : "edgefest2016\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "edgefest2016",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "edgefest2016.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/NicolasDinunno\/EdgeFest2016.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2A6D9FB7FAFBABC4E61E645AB3426E1AE369D7D4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/NicolasDinunno\/EdgeFest2016.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4E27FB6D9724CB132D8561E37647452683ED3594"
+    }
+  ]
+}
