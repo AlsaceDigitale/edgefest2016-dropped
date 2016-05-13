@@ -1,89 +1,51 @@
-
-//
-// Disclamer:
-// ----------
-//
-// This code will work only if you selected window, graphics and audio.
-//
-// Note that the "Run Script" build phase will copy the required frameworks
-// or dylibs to your application bundle so you can execute it on any OS X
-// computer.
-//
-// Your resource files (images, sounds, fonts, ...) are also copied to your
-// application bundle. To get the path to these resource, use the helper
-// method resourcePath() from ResourcePath.hpp
-//
-
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/System/Time.hpp>
 
-// Here is a small helper for you ! Have a look.
-#include "ResourcePath.hpp"
+#define TILE_NUMBER 12
+#define TILE_OUTLINE 3
+#define TILE_SPEED 200.f
 
-int main(int, char const**)
-{
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+int main(int, char const**) {
+    sf::RenderWindow window(sf::VideoMode(300, 1080), "SFML window");
+    uint32_t width = window.getSize().x;
+    uint32_t height = window.getSize().y;
 
-    // Set the Icon
-    sf::Image icon;
-    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
-        return EXIT_FAILURE;
-    }
-    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
-    // Load a sprite to display
-    sf::Texture texture;
-    if (!texture.loadFromFile(resourcePath() + "cute_image.jpg")) {
-        return EXIT_FAILURE;
-    }
-    sf::Sprite sprite(texture);
-
-    // Create a graphical text to display
-    sf::Font font;
-    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
-        return EXIT_FAILURE;
-    }
-    sf::Text text("Hello SFML", font, 50);
-    text.setColor(sf::Color::Black);
-
-    // Load a music to play
-    sf::Music music;
-    if (!music.openFromFile(resourcePath() + "nice_music.ogg")) {
-        return EXIT_FAILURE;
-    }
-
-    // Play the music
-    music.play();
-
-    // Start the game loop
-    while (window.isOpen())
-    {
-        // Process events
+    sf::RectangleShape grid(sf::Vector2f(width - TILE_OUTLINE * 2, height / TILE_NUMBER - TILE_OUTLINE * 4));
+    grid.setPosition(TILE_OUTLINE, TILE_OUTLINE);
+    grid.setFillColor(sf::Color(0, 0, 0, 0));
+    grid.setOutlineColor(sf::Color(255, 255, 255, 255));
+    grid.setOutlineThickness(TILE_OUTLINE);
+    
+    sf::RectangleShape tile(sf::Vector2f((width - 2 * TILE_OUTLINE) / 4, height / TILE_NUMBER - TILE_OUTLINE * 4));
+    tile.setPosition(TILE_OUTLINE, TILE_OUTLINE * 2);
+    tile.setFillColor(sf::Color(255, 0, 0));
+    
+    sf::Clock clock;
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // Close window: exit
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-
-            // Escape pressed: exit
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 window.close();
             }
         }
 
-        // Clear screen
         window.clear();
+        sf::Time elapsedTime = clock.getElapsedTime();
+        clock.restart();
+        
+        tile.setPosition(tile.getPosition().x, tile.getPosition().y + (elapsedTime.asSeconds() * TILE_SPEED));
+        window.draw(tile);
 
-        // Draw the sprite
-        window.draw(sprite);
+        for (int i = 0 ; i < TILE_NUMBER ; ++i) {
+            grid.setPosition(TILE_OUTLINE, TILE_OUTLINE * 2 + i * height / TILE_NUMBER);
+            window.draw(grid);
+        }
 
-        // Draw the string
-        window.draw(text);
-
-        // Update the window
         window.display();
     }
 

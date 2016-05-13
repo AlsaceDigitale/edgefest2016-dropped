@@ -7,24 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE5B189D1CE661D600A26EA9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE5B189C1CE661D600A26EA9 /* ResourcePath.mm */; };
 		CE5B18A01CE661D600A26EA9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE5B189F1CE661D600A26EA9 /* main.cpp */; };
-		CE5B18A31CE661D600A26EA9 /* cute_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE5B18A21CE661D600A26EA9 /* cute_image.jpg */; };
-		CE5B18A51CE661D600A26EA9 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = CE5B18A41CE661D600A26EA9 /* nice_music.ogg */; };
-		CE5B18A71CE661D600A26EA9 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE5B18A61CE661D600A26EA9 /* sansation.ttf */; };
-		CE5B18A91CE661D600A26EA9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B18A81CE661D600A26EA9 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE5B18971CE661D600A26EA9 /* edgefest2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edgefest2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5B189B1CE661D600A26EA9 /* edgefest2016-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "edgefest2016-Info.plist"; sourceTree = "<group>"; };
-		CE5B189C1CE661D600A26EA9 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
-		CE5B189E1CE661D600A26EA9 /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		CE5B189F1CE661D600A26EA9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		CE5B18A21CE661D600A26EA9 /* cute_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cute_image.jpg; sourceTree = "<group>"; };
-		CE5B18A41CE661D600A26EA9 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = nice_music.ogg; sourceTree = "<group>"; };
-		CE5B18A61CE661D600A26EA9 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
-		CE5B18A81CE661D600A26EA9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,10 +46,7 @@
 		CE5B18991CE661D600A26EA9 /* edgefest2016 */ = {
 			isa = PBXGroup;
 			children = (
-				CE5B189C1CE661D600A26EA9 /* ResourcePath.mm */,
-				CE5B189E1CE661D600A26EA9 /* ResourcePath.hpp */,
 				CE5B189F1CE661D600A26EA9 /* main.cpp */,
-				CE5B18A11CE661D600A26EA9 /* Resources */,
 				CE5B189A1CE661D600A26EA9 /* Supporting Files */,
 			);
 			path = edgefest2016;
@@ -72,17 +58,6 @@
 				CE5B189B1CE661D600A26EA9 /* edgefest2016-Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CE5B18A11CE661D600A26EA9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				CE5B18A21CE661D600A26EA9 /* cute_image.jpg */,
-				CE5B18A41CE661D600A26EA9 /* nice_music.ogg */,
-				CE5B18A61CE661D600A26EA9 /* sansation.ttf */,
-				CE5B18A81CE661D600A26EA9 /* icon.png */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,10 +117,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5B18A91CE661D600A26EA9 /* icon.png in Resources */,
-				CE5B18A71CE661D600A26EA9 /* sansation.ttf in Resources */,
-				CE5B18A51CE661D600A26EA9 /* nice_music.ogg in Resources */,
-				CE5B18A31CE661D600A26EA9 /* cute_image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +144,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5B18A01CE661D600A26EA9 /* main.cpp in Sources */,
-				CE5B189D1CE661D600A26EA9 /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
