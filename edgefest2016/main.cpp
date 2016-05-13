@@ -13,6 +13,11 @@
 #define TILE_OUTLINE 3
 #define TILE_SPEED 400.f
 
+void lose(sf::RenderWindow& window) {
+    std::cout << "You lose!" << std::endl;
+    window.close();
+}
+
 class Tile {
 public:
     Tile(sf::RenderWindow& window, float posx, float posy) :
@@ -29,7 +34,9 @@ public:
     void setHorizontalPosition() {
         xpos = rand() % 4;
         x = TILE_OUTLINE + ((window.getSize().x - 2 * TILE_OUTLINE) / 4) * xpos;
+        tile.setFillColor(sf::Color(255, 0, 0));
         tile.setPosition(x, y);
+        clicked = false;
     }
     
     void move(float elapsedTime) {
@@ -37,6 +44,9 @@ public:
         
         if (y > window.getSize().y) {
             y = (TILE_OUTLINE * 1.f + (TILE_NUMBER - 1) * window.getSize().y / TILE_NUMBER) - window.getSize().y + y - window.getSize().y;
+            if (!clicked) {
+                lose(window);
+            }
             setHorizontalPosition();
         }
         
@@ -46,12 +56,21 @@ public:
     void draw() {
         window.draw(tile);
     }
-
-private:
+    
+    int keyPressed(int pos) {
+        if (pos != xpos || clicked) {
+            lose(window);
+        } else {
+            tile.setFillColor(sf::Color(150, 150, 255));
+        }
+        clicked = true;
+    }
+    
     sf::RenderWindow& window;
     sf::RectangleShape tile;
     float x, y;
     uint8_t xpos;
+    bool clicked;
 };
 
 int main(int, char const**) {
@@ -76,6 +95,9 @@ int main(int, char const**) {
     clock.restart();
     while (window.isOpen()) {
         sf::Event event;
+        
+        bool btn[4] = { false };
+        
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
@@ -83,22 +105,69 @@ int main(int, char const**) {
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 window.close();
             }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) {
+                btn[0] = true;
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) {
+                btn[1] = true;
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num3) {
+                btn[2] = true;
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num4) {
+                btn[3] = true;
+            }
         }
 
         window.clear();
         sf::Time elapsedTime = clock.getElapsedTime();
         clock.restart();
         
+        Tile* last = NULL;
+        
         for (int i = 0 ; i < TILE_NUMBER + 1 ; ++i) {
             Tile* tile = tiles[i];
             
             tile->move(elapsedTime.asSeconds());
             tile->draw();
+            
+            if ((tile->y + height / TILE_NUMBER) <= height && (tile->y + height / TILE_NUMBER) >= height - height / TILE_NUMBER) {
+                last = tile;
+            }
         }
 
         for (int i = 0 ; i < TILE_NUMBER ; ++i) {
             grid.setPosition(TILE_OUTLINE, TILE_OUTLINE * 2 + i * height / TILE_NUMBER);
             window.draw(grid);
+        }
+        
+        if (btn[0]) {
+            if (last == NULL) {
+                lose(window);
+            } else {
+                last->keyPressed(0);
+            }
+        }
+        if (btn[1]) {
+            if (last == NULL) {
+                lose(window);
+            } else {
+                last->keyPressed(1);
+            }
+        }
+        if (btn[2]) {
+            if (last == NULL) {
+                lose(window);
+            } else {
+                last->keyPressed(2);
+            }
+        }
+        if (btn[3]) {
+            if (last == NULL) {
+                lose(window);
+            } else {
+                last->keyPressed(3);
+            }
         }
 
         window.display();
