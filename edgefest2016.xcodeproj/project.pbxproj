@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		CE5B18A01CE661D600A26EA9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE5B189F1CE661D600A26EA9 /* main.cpp */; };
+		CE5B18B11CE7D11200A26EA9 /* GameLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE5B18B01CE7D11200A26EA9 /* GameLoop.cpp */; };
+		CE5B18B41CE7D19A00A26EA9 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE5B18B21CE7D19A00A26EA9 /* Grid.cpp */; };
+		CE5B18B71CE7D1CB00A26EA9 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE5B18B51CE7D1CB00A26EA9 /* Tile.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE5B18971CE661D600A26EA9 /* edgefest2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edgefest2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5B189B1CE661D600A26EA9 /* edgefest2016-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "edgefest2016-Info.plist"; sourceTree = "<group>"; };
 		CE5B189F1CE661D600A26EA9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CE5B18AF1CE7D0F800A26EA9 /* GameLoop.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameLoop.hpp; sourceTree = "<group>"; };
+		CE5B18B01CE7D11200A26EA9 /* GameLoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLoop.cpp; sourceTree = "<group>"; };
+		CE5B18B21CE7D19A00A26EA9 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
+		CE5B18B31CE7D19A00A26EA9 /* Grid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Grid.hpp; sourceTree = "<group>"; };
+		CE5B18B51CE7D1CB00A26EA9 /* Tile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tile.cpp; sourceTree = "<group>"; };
+		CE5B18B61CE7D1CB00A26EA9 /* Tile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tile.hpp; sourceTree = "<group>"; };
+		CE5B18B91CE7D38200A26EA9 /* configs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = configs.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +58,13 @@
 			children = (
 				CE5B189F1CE661D600A26EA9 /* main.cpp */,
 				CE5B189A1CE661D600A26EA9 /* Supporting Files */,
+				CE5B18AF1CE7D0F800A26EA9 /* GameLoop.hpp */,
+				CE5B18B01CE7D11200A26EA9 /* GameLoop.cpp */,
+				CE5B18B21CE7D19A00A26EA9 /* Grid.cpp */,
+				CE5B18B31CE7D19A00A26EA9 /* Grid.hpp */,
+				CE5B18B51CE7D1CB00A26EA9 /* Tile.cpp */,
+				CE5B18B61CE7D1CB00A26EA9 /* Tile.hpp */,
+				CE5B18B91CE7D38200A26EA9 /* configs.hpp */,
 			);
 			path = edgefest2016;
 			sourceTree = "<group>";
@@ -143,7 +160,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5B18B41CE7D19A00A26EA9 /* Grid.cpp in Sources */,
 				CE5B18A01CE661D600A26EA9 /* main.cpp in Sources */,
+				CE5B18B11CE7D11200A26EA9 /* GameLoop.cpp in Sources */,
+				CE5B18B71CE7D1CB00A26EA9 /* Tile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +301,7 @@
 				CE5B18AE1CE661D600A26EA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
