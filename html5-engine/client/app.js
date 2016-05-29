@@ -1,5 +1,5 @@
+import { scaleUi } from './ui';
+
 require('./style.scss');
 
-import { Stage } from 'EaselJS';
-
-console.log(Stage);
+scaleUi();

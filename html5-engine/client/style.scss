@@ -1,3 +1,44 @@
+$mainColor: lime;
+
+html { overflow: hidden; }
+
 body {
     background-color: black;
+    font-family: monospace;
+    font-size: 90%;
+    color: $mainColor;
+
+    a {
+        color: $mainColor;
+
+        &:hover {
+            color: lighten($mainColor, 30%);
+            text-shadow: 0 0 8px lighten($mainColor, 30%);
+        }
+    }
+}
+
+header {
+    margin: auto;
+    padding: 10px 0 10px 0;
+
+    h1 {
+        display: inline;
+        font-size: 0.8em;
+
+        .version {
+            color: black;
+            background-color: $mainColor;
+        }
+    }
+
+    nav.top-menu {
+        float: right;
+    }
+}
+
+canvas#stage {
+    display: block;
+    margin: auto;
+    border: 3px solid $mainColor;
 }
