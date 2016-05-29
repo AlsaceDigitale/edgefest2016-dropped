@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackBrowserPlugin = require('webpack-browser-plugin');
 
 module.exports = {
     entry: {
@@ -18,13 +17,17 @@ module.exports = {
     
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel', query: { presets: 'es2015' } },
+            { test: /\.js$/, loader: 'babel?presets=es2015' },
             { test: /\.scss$/, loaders: ['style', 'css', 'resolve-url', 'sass'] },
-            { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports', query: { jQuery: 'jquery' } }
+            { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
+            { test: /bower_components\/EaselJS\/.*\.js$/, loader: 'imports?this=>window!exports?window.createjs' }
         ]
     },
     
     plugins: [
+        new webpack.ResolverPlugin(
+            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
+        ),
         new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'vendor'], minChunks: Infinity }),
         new webpack.NoErrorsPlugin(),
         new webpack.ProvidePlugin({
@@ -34,11 +37,11 @@ module.exports = {
             'Tether'       : 'tether',
             'window.Tether': 'tether'
         }),
-        new HtmlWebpackPlugin({ template: path.join(__dirname, 'client', 'index.html') }),
-        new WebpackBrowserPlugin()
+        new HtmlWebpackPlugin({ template: path.join(__dirname, 'client', 'index.html') })
     ],
 
     resolve: {
+        modulesDirectories: ['node_modules', 'bower_components'],
         root: [path.join(__dirname, 'client')],
         extensions: ['', '.js']
     },

@@ -1,0 +1,14 @@
+{
+  "name": "edgefest-html5-engine",
+  "description": "HTML 5 game platform for EdgeFest 2016",
+  "main": "",
+  "authors": [
+    "Morgan Touverey Quilling <mtouverey@alembic-dev.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/AlsaceDigitale/EdgeFest2016",
+  "private": true,
+  "dependencies": {
+    "EaselJS": "^0.8.2"
+  }
+}

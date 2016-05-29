@@ -1,3 +1,5 @@
 require('./style.scss');
 
-console.log('hello!');
+import { Stage } from 'EaselJS';
+
+console.log(Stage);
