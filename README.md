@@ -4,6 +4,8 @@ Choisissez un parfum : le projet SFML (indev) ou HTML5 (indev).
 
 ## HTML5 Engine
 
+**Référent :** [Morgan Touverey-Quilling](https://github.com/toverux)
+
 *Do not use. En développement actif.*
 
 **Requis :**
@@ -21,5 +23,7 @@ Choisissez un parfum : le projet SFML (indev) ou HTML5 (indev).
 
 
 ## SFML Engine
+
+**Référent :** [Matthieu Kern](https://github.com/matthieukern)
 
 *Do not use. En développement actif.*
