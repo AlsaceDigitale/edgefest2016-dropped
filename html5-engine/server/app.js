@@ -1,10 +1,10 @@
 import express from 'express';
 import { join } from 'path';
+import server from './http';
+import './websockets';
 
 const app = express();
 
-app.use(express.static(join(__dirname, '..', 'client', 'dist')));
+app.use(express.static(__dirname+'/../client/dist'));
 
-app.listen(3030);
-
-console.log('Server listening on localhost:3030');
+server.on('request', app);
