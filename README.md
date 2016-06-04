@@ -10,7 +10,7 @@ Choisissez un parfum : le projet SFML (indev) ou HTML5 (indev).
 
 **Requis :**
  - Un système POSIX. Windows n'est pas supporté pour le moment et ne le sera pas avant que quelqu'un veuille porter le projet sous cette plateforme.
- - Node JS et npm, versions récentes (minimum testé : Node 4, npm 3). [Télécharger pour Linux via NodeSource](https://github.com/nodesource/distributions).
+ - Node.js et npm, versions récentes (actuellement testé avec Node 6 & npm 3). [Télécharger pour Linux via NodeSource](https://github.com/nodesource/distributions).
  - Bower (`npm install -g bower`)
  
 **Lancement :**
