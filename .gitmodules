@@ -1,0 +1,3 @@
+[submodule "edgefest2016-html-platform"]
+	path = edgefest2016-html-platform
+	url = git@github.com:toverux/edgefest2016-html-platform.git
