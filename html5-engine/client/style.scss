@@ -35,6 +35,11 @@ header {
     nav.top-menu {
         float: right;
     }
+
+    nav.games-menu a {
+        display: inline-block;
+        margin-right: 15px;
+    }
 }
 
 a { cursor: pointer; }
