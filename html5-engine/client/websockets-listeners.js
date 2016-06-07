@@ -1,5 +1,6 @@
 import AnsiConverter from 'ansi-to-html';
 import { log, hideConsole, updateGamesList } from './ui';
+import { resetGame, startGame } from './games-manager';
 
 let ansiConverter = new AnsiConverter();
 
@@ -20,8 +21,10 @@ export const LISTENERS = {
         log(`Compiling ${fileName}...`);
     },
 
-    'ev:game:compile-done'(respond, filename) {
+    'ev:game:compile-done'(respond, { name, filename }) {
         log('Compilation done! I will try to ENTER() your game now.');
+        
+        resetGame(name);
 
         // Instead of recv the source and eval()'ing it, we load the game via a script tag.
         // Otherwise, source maps are very badly supported.
@@ -29,6 +32,7 @@ export const LISTENERS = {
 
         setTimeout(() => {
             hideConsole();
+            startGame(name);
         }, 1500);
     }
 };

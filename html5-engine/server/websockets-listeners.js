@@ -11,7 +11,7 @@ export const LISTENERS = {
             respond('ev:game:compile-start', gameinfo);
 
             let filename = await compileGame(gameinfo, file => respond('ev:game:compile-file', file));
-            respond('ev:game:compile-done', filename);
+            respond('ev:game:compile-done', { name: gameinfo.name, filename });
         } catch(err) {
             respond('error', err.stack);
         }
