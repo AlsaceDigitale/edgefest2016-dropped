@@ -1,7 +1,8 @@
 const availableLibs = ['edgefest2016', 'easel', 'three'];
-const expectedExports = { 'ENTER': true, 'LOOP': true, 'LEAVE': true, 'UPDATEKEYS': true };
 
 export function makePlugin(gameName) {
+    const expectedExports = { 'ENTER': true, 'LOOP': true, 'LEAVE': true, 'UPDATEKEYS': true };
+
     return function({ types: t }) { return { visitor: {
         ImportDeclaration(path) {
             let stmt = path.node;

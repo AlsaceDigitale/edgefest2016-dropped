@@ -18,6 +18,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.js$/, loader: 'babel?presets=es2015' },
+            { test: /\.json$/, loader: 'json' },
             { test: /\.scss$/, loaders: ['style', 'css', 'resolve-url', 'sass'] },
             { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
             { test: /bower_components\/EaselJS\/.*\.js$/, loader: 'imports?this=>window!exports?window.createjs' }
