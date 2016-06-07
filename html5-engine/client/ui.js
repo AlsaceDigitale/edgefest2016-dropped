@@ -18,11 +18,11 @@ export function log(message, server = false) {
     let type = server ? '<=' : '=>';
     message = message.replace(/\n/g, '\n   ');
 
-    $CONSOLE.append(`<b>${type}</b> ${message}<br>`).slideDown();
+    $CONSOLE.append(`<b>${type}</b> ${message}<br>`).slideDown(200);
 }
 
 export function hideConsole() {
-    $CONSOLE.slideUp(() => $CONSOLE.html(''));
+    $CONSOLE.slideUp(200, () => $CONSOLE.html(''));
 }
 
 export function updateGamesList(gamesList) {
