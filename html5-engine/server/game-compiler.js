@@ -3,7 +3,7 @@ import promisify from 'es6-promisify';
 import browserify from 'browserify';
 import babelify from 'babelify';
 import es2015preset from 'babel-preset-es2015';
-import { makePlugin } from './game-ast-transformer';
+import { TransformerMaker } from './game-ast-transformer';
 
 export const GAMES_DIR = process.env.GAMES_DIR;
 if(!GAMES_DIR) {
@@ -44,17 +44,25 @@ export async function listGames() {
 export function compileGame(gameinfo, progress = () => {}) {
     return new Promise((resolve, reject) => {
         let filename = gameinfo.name.replace(/\s/g, '-');
+        let astTransformer = new TransformerMaker(gameinfo.name);
 
         browserify(gameinfo.rootPath, { debug: true })
             .transform(babelify, {
                 sourceType: 'module',
                 presets: [es2015preset],
-                plugins: [makePlugin(gameinfo.name)]
+                plugins: [astTransformer.plugin]
             })
             .on('file', progress)
             .bundle()
             .on('error', reject)
-            .on('end', () => resolve(filename))
+            .on('end', () => {
+                let missing = astTransformer.missingGameFunctions;
+                if(missing.length) {
+                    reject(new Error('Your game lacks exports for: '+missing.join(', ')));
+                } else {
+                    resolve(filename);
+                }
+            })
             .pipe(fs.createWriteStream(`${__dirname}/../client/dist/${filename}.js`));
     });
 }
