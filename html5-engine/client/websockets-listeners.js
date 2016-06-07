@@ -20,9 +20,15 @@ export const LISTENERS = {
         log(`Compiling ${fileName}...`);
     },
 
-    'ev:game:compile-done'(respond, source) {
-        log('Compilation done!');
-        hideConsole();
-        console.log(source);
+    'ev:game:compile-done'(respond, filename) {
+        log('Compilation done! I will try to ENTER() your game now.');
+
+        // Instead of recv the source and eval()'ing it, we load the game via a script tag.
+        // Otherwise, source maps are very badly supported.
+        $('body').append(`<script src="http://localhost:3030/${filename}.js"></script>`);
+
+        setTimeout(() => {
+            hideConsole();
+        }, 1500);
     }
 };

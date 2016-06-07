@@ -10,8 +10,8 @@ export const LISTENERS = {
             let gameinfo = await getGameinfo(gameName);
             respond('ev:game:compile-start', gameinfo);
 
-            let source = await compileGame(gameinfo, file => respond('ev:game:compile-file', file));
-            respond('ev:game:compile-done', source);
+            let filename = await compileGame(gameinfo, file => respond('ev:game:compile-file', file));
+            respond('ev:game:compile-done', filename);
         } catch(err) {
             respond('error', err.stack);
         }

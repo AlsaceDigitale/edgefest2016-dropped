@@ -43,9 +43,9 @@ export async function listGames() {
 
 export function compileGame(gameinfo, progress = () => {}) {
     return new Promise((resolve, reject) => {
-        let source = '';
+        let filename = gameinfo.name.replace(/\s/g, '-');
 
-        browserify(gameinfo.rootPath)
+        browserify(gameinfo.rootPath, { debug: true })
             .transform(babelify, {
                 sourceType: 'module',
                 presets: [es2015preset],
@@ -54,7 +54,7 @@ export function compileGame(gameinfo, progress = () => {}) {
             .on('file', progress)
             .bundle()
             .on('error', reject)
-            .on('data', data => source += data.toString())
-            .on('end', () => resolve(source));
+            .on('end', () => resolve(filename))
+            .pipe(fs.createWriteStream(`${__dirname}/../client/dist/${filename}.js`));
     });
 }
