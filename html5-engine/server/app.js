@@ -1,7 +1,7 @@
 import express from 'express';
 import { join } from 'path';
 import server from './http';
-import { send } from './websockets';
+import './websockets';
 
 const app = express();
 
