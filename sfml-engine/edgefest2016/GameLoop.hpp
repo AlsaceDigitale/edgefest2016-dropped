@@ -31,8 +31,12 @@ public:
     
     void init();
     void run();
+    void restart();
     
     sf::RenderWindow& getWindow();
+    
+    void incrementScore();
+    void decrementScore();
     
 private:
     GameLoop();
@@ -41,6 +45,8 @@ private:
     std::vector<Tile*> tiles;
     Grid* grid;
     sf::Clock clock;
+    
+    int score;
 };
 
 #endif /* GameLoop_hpp */

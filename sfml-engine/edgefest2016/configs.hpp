@@ -15,7 +15,12 @@
 #define FRAMERATE 60
 
 #define TILE_NUMBER 6
+#define TILE_WIDTH 3
 #define TILE_OUTLINE 3
-#define TILE_SPEED 400.f
+#define TILE_SPEED 300.f
+
+#define BAR_SIZE 10
+
+#define SCORE_INCR 10
 
 #endif /* configs_hpp */

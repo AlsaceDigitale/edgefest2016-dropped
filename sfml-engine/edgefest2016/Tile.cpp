@@ -7,11 +7,12 @@
 //
 
 #include "Tile.hpp"
+#include "configs.hpp"
 
 #include <iostream>
 
 Tile::Tile(float posx, float posy) {
-    tile.setSize(sf::Vector2f((GameLoop::Instance().getWindow().getSize().x - 2 * TILE_OUTLINE) / 4,
+    tile.setSize(sf::Vector2f((GameLoop::Instance().getWindow().getSize().x - 2 * TILE_OUTLINE) / TILE_WIDTH,
                                   GameLoop::Instance().getWindow().getSize().y / TILE_NUMBER - TILE_OUTLINE * 4));
     x = posx;
     y = posy;
@@ -19,9 +20,9 @@ Tile::Tile(float posx, float posy) {
 }
 
 uint8_t Tile::randomHorizontalPosition() {
-    horizontalPosition = rand() % 4;
-    x = TILE_OUTLINE + ((GameLoop::Instance().getWindow().getSize().x - 2 * TILE_OUTLINE) / 4) * horizontalPosition;
-    tile.setFillColor(sf::Color(255, 0, 0));
+    horizontalPosition = rand() % TILE_WIDTH;
+    x = TILE_OUTLINE + ((GameLoop::Instance().getWindow().getSize().x - 2 * TILE_OUTLINE) / TILE_WIDTH) * horizontalPosition;
+    tile.setFillColor(sf::Color(255, 255, 255));
     tile.setPosition(x, y);
     clicked = false;
 }
@@ -38,7 +39,7 @@ void Tile::move(float elapsedTime) {
     if (y > winHeight) {
         y = (TILE_OUTLINE * 1.f + (TILE_NUMBER - 1) * winHeight / TILE_NUMBER) - winHeight + y - winHeight;
         if (!clicked) {
-            exit(0);
+            missed();
         }
         randomHorizontalPosition();
     }
@@ -52,13 +53,26 @@ void Tile::draw() {
 
 bool Tile::checkKeyPressed(int pos) {
     if (pos != horizontalPosition || clicked) {
-        exit(0);
+        //GameLoop::Instance().restart();
     } else {
-        tile.setFillColor(sf::Color(150, 150, 255));
+        tile.setFillColor(sf::Color(150, 255, 150));
+        clicked = true;
+        GameLoop::Instance().incrementScore();
     }
-    clicked = true;
+}
+
+void Tile::missed() {
+    if (!clicked) {
+        tile.setFillColor(sf::Color(255, 150, 150));
+        GameLoop::Instance().decrementScore();
+        clicked = true;
+    }
 }
 
 float Tile::getYPosition() {
     return y;
+}
+
+bool Tile::isClicked() {
+    return clicked;
 }

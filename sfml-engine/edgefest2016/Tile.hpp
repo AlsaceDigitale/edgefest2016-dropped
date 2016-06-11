@@ -31,6 +31,9 @@ public:
     
     float getYPosition();
     
+    bool isClicked();
+    void missed();
+    
 private:
     sf::RectangleShape tile;
     float x, y;

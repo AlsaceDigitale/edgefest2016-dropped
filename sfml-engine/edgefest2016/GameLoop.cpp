@@ -10,6 +10,9 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <sstream>
+
+#include "ResourcePath.hpp"
 
 GameLoop& GameLoop::Instance() {
     static GameLoop instance;
@@ -31,14 +34,48 @@ void GameLoop::init() {
     }
     
     grid = new Grid();
+    
+    score = 0;
+}
+
+void GameLoop::restart() {
+    srand(time(NULL));
+    
+    tiles.clear();
+    for (int i = 0 ; i < TILE_NUMBER + 1 ; ++i) {
+        Tile* tile = new Tile(TILE_OUTLINE, (TILE_OUTLINE * 2.f + i *
+                                             window.getSize().y / TILE_NUMBER) - window.getSize().y);
+        tiles.push_back(tile);
+    }
+    
+    delete grid;
+    grid = new Grid();
+    
+    score = 0;
 }
 
 void GameLoop::run() {
     clock.restart();
+    
+    std::stringstream ss;
+    
+    sf::Font font;
+    if (!font.loadFromFile(resourcePath() + "sansation.ttf"))
+        return EXIT_FAILURE;
+    
+    sf::Text scoreText;
+    scoreText.setFont(font);
+    scoreText.setCharacterSize(40);
+    scoreText.setPosition(0, 0);
+    scoreText.setColor(sf::Color(255, 0, 0));
+    
+    ss << score;
+    scoreText.setString(ss.str());
+
     while (window.isOpen()) {
         sf::Event event;
         
-        bool btn[4] = { false };
+        bool btn[5] = { false };
         
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -51,6 +88,27 @@ void GameLoop::run() {
             btn[1] |= event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2;
             btn[2] |= event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num3;
             btn[3] |= event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num4;
+            btn[4] |= event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num5;
+            
+            /*btn[0] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 0;
+            btn[1] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 14;
+            btn[2] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 3;*/
+
+            if (TILE_WIDTH == 3) {
+                btn[0] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 15;
+                btn[1] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 12;
+                btn[2] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 13;
+            } else if (TILE_WIDTH == 5) {
+                btn[0] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 15;
+                btn[1] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 2;
+                btn[2] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 12;
+                btn[3] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 1;
+                btn[4] |= event.type == sf::Event::JoystickButtonPressed && event.joystickButton.button == 13;
+            }
+            
+            
+            if (event.type == sf::Event::JoystickButtonPressed)
+                std::cout << "Button " << event.joystickButton.button << " pressed." << std::endl;
         }
         
         window.clear();
@@ -65,15 +123,22 @@ void GameLoop::run() {
             tile->move(elapsedTime.asSeconds());
             tile->draw();
             
-            if ((tile->getYPosition() + window.getSize().y / TILE_NUMBER) <= window.getSize().y && (tile->getYPosition() + window.getSize().y / TILE_NUMBER) >= window.getSize().y - window.getSize().y / TILE_NUMBER) {
+            if ((tile->getYPosition() + window.getSize().y / TILE_NUMBER) <= window.getSize().y &&
+                (tile->getYPosition() + window.getSize().y / TILE_NUMBER) >= window.getSize().y - window.getSize().y / TILE_NUMBER) {
                 last = tile;
+            }
+            
+            if ((tile->getYPosition()) <= window.getSize().y &&
+                (tile->getYPosition()) >= window.getSize().y - window.getSize().y / TILE_NUMBER &&
+                !tile->isClicked()) {
+                tile->missed();
             }
         }
         
-        for (int i = 0 ; i < 4 ; ++i) {
+        for (int i = 0 ; i < TILE_WIDTH ; ++i) {
             if (btn[i]) {
                 if (last == NULL) {
-                    exit(0);
+                    //GameLoop::Instance().restart();
                 } else {
                     last->checkKeyPressed(i);
                 }
@@ -81,6 +146,12 @@ void GameLoop::run() {
         }
         
         grid->draw();
+
+        ss.str("");
+        ss << score;
+        scoreText.setString(ss.str());
+        window.draw(scoreText);
+        
         window.display();
         std::this_thread::sleep_for(std::chrono::milliseconds(1000 / FRAMERATE - elapsedTime.asMilliseconds()));
     }
@@ -88,4 +159,12 @@ void GameLoop::run() {
 
 sf::RenderWindow& GameLoop::getWindow() {
     return window;
+}
+
+void GameLoop::incrementScore() {
+    score += SCORE_INCR;
+}
+
+void GameLoop::decrementScore() {
+    score -= 5 * SCORE_INCR;
 }
